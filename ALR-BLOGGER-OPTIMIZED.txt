@@ -1,0 +1,376 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html>
+<html b:css='false' b:defaultwidgetversion='2' b:layoutsVersion='3' b:responsive='true' b:templateVersion='2.0.0' expr:class='data:blog.languageDirection' expr:dir='data:blog.languageDirection' xmlns='http://www.w3.org/1999/xhtml' xmlns:b='http://www.google.com/2005/gml/b' xmlns:data='http://www.google.com/2005/gml/data' xmlns:expr='http://www.google.com/2005/gml/expr'>
+
+  <head>
+    <meta charset='utf-8'/>
+    
+    <!-- =============== تحسينات الأداء الأساسية =============== -->
+    <!-- 1. Preconnect للخوادم الخارجية (تحسين الاتصال) -->
+    <link href='https://fonts.googleapis.com' rel='preconnect' crossorigin/>
+    <link href='https://fonts.gstatic.com' rel='preconnect' crossorigin/>
+    
+    <!-- 2. استبدال Font Awesome بنسخة مضغوطة -->
+    <link href='https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css' rel='stylesheet' crossorigin='anonymous'/>
+    
+    <!-- 3. Meta Viewport محسّن (بدون maximum-scale لتفعيل الـ Zoom) -->
+    <meta content='width=device-width, initial-scale=1' name='viewport'/>
+    
+    <!-- =============== SEO Meta Tags محسّنة للأرشفة =============== -->
+    <title><b:if cond='data:blog.pageType == "index"'><data:blog.title/><b:else/><data:blog.pageName/> | <data:blog.title/></b:if></title>
+    
+    <!-- Meta Description - مهم جداً للأرشفة -->
+    <meta name='description' expr:content='data:blog.pageType == "index" ? data:blog.description : data:post.snippet'/>
+    <meta name='keywords' content='الرقيبة التجارية, تجارة, أخبار تجارية'/>
+    <meta name='author' expr:content='data:blog.title'/>
+    <meta name='language' content='ar'/>
+    <meta name='robots' content='index, follow'/>
+    <meta name='googlebot' content='index, follow, max-snippet:-1, max-image-preview:large, max-video-preview:-1'/>
+    
+    <!-- Open Graph Tags - لتحسين المشاركة بالمواقع الاجتماعية -->
+    <meta property='og:site_name' expr:content='data:blog.title'/>
+    <meta property='og:type' content='website'/>
+    <meta property='og:title' expr:content='data:blog.pageName ? data:blog.pageName : data:blog.title'/>
+    <meta property='og:description' expr:content='data:blog.pageType == "index" ? data:blog.description : data:post.snippet'/>
+    <meta property='og:url' expr:content='data:blog.url'/>
+    <meta property='og:locale' content='ar_SA'/>
+    
+    <!-- Twitter Card Tags -->
+    <meta name='twitter:card' content='summary_large_image'/>
+    <meta name='twitter:title' expr:content='data:blog.pageName ? data:blog.pageName : data:blog.title'/>
+    
+    <!-- JSON-LD Structured Data - تحسين ظهور الموقع في البحث -->
+    <script type='application/ld+json'>{
+      "@context": "https://schema.org",
+      "@type": "Blog",
+      "name": "<data:blog.title/>",
+      "url": "<data:blog.url/>",
+      "description": "<data:blog.description/>"
+    }</script>
+    
+    <!-- الخطوط المحسّنة - تحميل غير حجز (Async) -->
+    <link href='https://fonts.googleapis.com/css2?family=Almarai:wght@400;700&amp;family=Cairo:wght@600;800&amp;display=swap' rel='stylesheet' media='print' onload="this.media='all'" crossorigin/>
+    
+    <!-- Canonical Link - تجنب محتوى مكرر -->
+    <link rel='canonical' expr:href='data:blog.url'/>
+    
+    <!-- RSS Feed - مهم للأرشفة -->
+    <link rel='alternate' type='application/rss+xml' expr:title='data:blog.title' expr:href='data:blog.url + "/feeds/posts/default"'/>
+    
+    <b:include data='blog' name='all-head-content'/>
+
+    <!-- =============== CSS المحسّن =============== -->
+    <b:skin version='2.0.0'><![CDATA[
+    
+    /* متغيرات التصميم */
+    <Variable name="keycolor" description="Main Color" type="color" hideEditor="true" default="#0028f0" value="#0028f0"/>
+    
+    <Group description="Theme Colors" selector="body">
+      <Variable name="main.color" description="Theme Color" type="color" default="#0028f0" value="#0028f0"/>
+      <Variable name="dark.color" description="Dark Color" type="color" default="#232323" value="#232323"/>
+      <Variable name="body.text.color" description="Text Color" type="color" default="#716f6f" value="#716f6f"/>
+      <Variable name="title.color" description="Title Color" type="color" default="#222222" value="#222222"/>
+    </Group>
+    
+    /* =============== Reset و Core CSS =============== */
+    * { -webkit-box-sizing: border-box; box-sizing: border-box; }
+    html { overflow-y: scroll; -webkit-text-size-adjust: 100%; }
+    
+    body {
+      background-color: #fff;
+      font-family: "Almarai", sans-serif;
+      font-size: 16px;
+      font-weight: 400;
+      color: $(body.text.color);
+      word-wrap: break-word;
+      line-height: 1.6;
+      margin: 0;
+      padding: 0;
+    }
+    
+    /* تحسين الأداء: إزالة الـ Preloader الثقيل */
+    #preloader { display: none !important; }
+    
+    /* تحسين الوصول للموقع (Accessibility) */
+    h1, h2, h3, h4, h5, h6 { 
+      font-family: "Cairo", sans-serif; 
+      font-weight: 700;
+      margin: 1em 0 0.5em;
+      line-height: 1.3;
+    }
+    
+    a { color: $(main.color); text-decoration: none; transition: color 0.17s ease; }
+    a:hover { color: $(title.color); }
+    a:visited { color: $(title.color); }
+    
+    /* الصور - تحسين الأداء */
+    img { 
+      border: none; 
+      max-width: 100%; 
+      height: auto; 
+      display: block;
+    }
+    
+    /* تجنب Cumulative Layout Shift (CLS) */
+    .post-thumb {
+      display: block;
+      width: 100%;
+      aspect-ratio: 16/9;
+      overflow: hidden;
+      background: #f5f5f5;
+      object-fit: cover;
+    }
+    
+    /* =============== التخطيط الرئيسي =============== */
+    .row { width: 100%; max-width: 1140px; margin: 0 auto; }
+    
+    #content-wrapper {
+      float: left;
+      width: 100%;
+      padding: 0 0 35px;
+      background-color: #fcfcfc;
+    }
+    
+    #main-wrapper {
+      width: 100%;
+      overflow: hidden;
+      padding: 0;
+    }
+    
+    .item #main-wrapper {
+      width: 66.66666667%;
+      float: right;
+      padding: 0 15px;
+    }
+    
+    #sidebar-wrapper {
+      display: none;
+      width: 33.33333333%;
+      float: right;
+      padding: 0 15px;
+    }
+    
+    .item #sidebar-wrapper { display: block; }
+    
+    /* =============== Navigation Bar =============== */
+    #top-bar {
+      background-color: rgba(68, 63, 69, 0.95);
+      width: 100%;
+      padding: 15px 0;
+      overflow: hidden;
+      position: relative;
+    }
+    
+    .top-bar-nav ul li { float: left; }
+    .top-bar-nav ul li > a {
+      height: 30px;
+      display: block;
+      color: #fff;
+      font-size: 12px;
+      line-height: 30px;
+      margin: 0 0 0 10px;
+      padding: 0 5px;
+      transition: color 0.17s ease;
+    }
+    
+    .top-bar-nav ul li > a:hover { color: $(main.color); }
+    
+    /* =============== Sidebar Widgets =============== */
+    .sidebar .widget {
+      background-color: #fff;
+      padding: 0;
+      margin: 0 0 35px;
+      overflow: hidden;
+    }
+    
+    .sidebar .widget-title {
+      background-color: #f0f0f0;
+      display: block;
+      margin: 0 0 20px;
+    }
+    
+    .sidebar .widget-title > h3 {
+      font-size: 12px;
+      color: #333;
+      font-weight: 700;
+      line-height: 32px;
+      text-align: center;
+      text-transform: uppercase;
+      padding: 0 15px;
+      margin: 0;
+    }
+    
+    /* =============== Blog Search =============== */
+    .BlogSearch .search-input {
+      width: 75%;
+      height: 34px;
+      font-size: 13px;
+      padding: 5px 10px;
+      border: 1px solid #eaeaea;
+      border-right-width: 0;
+      float: left;
+    }
+    
+    .BlogSearch .search-action {
+      width: 25%;
+      height: 34px;
+      background-color: $(main.color);
+      color: #fff;
+      font-size: 13px;
+      border: 0;
+      cursor: pointer;
+      float: right;
+      transition: background 0.17s ease;
+    }
+    
+    .BlogSearch .search-action:hover { background-color: $(dark.color); }
+    
+    /* =============== Forms =============== */
+    .contact-form-name,
+    .contact-form-email,
+    .contact-form-email-message {
+      width: 100%;
+      font-family: inherit;
+      font-size: 13px;
+      padding: 5px 10px;
+      margin: 0 0 10px;
+      border: 1px solid #eaeaea;
+      box-sizing: border-box;
+    }
+    
+    .contact-form-button-submit {
+      width: 100%;
+      height: 34px;
+      background-color: $(main.color);
+      color: #fff;
+      font-size: 13px;
+      font-weight: 700;
+      cursor: pointer;
+      border: 0;
+      transition: background 0.17s ease;
+    }
+    
+    .contact-form-button-submit:hover { background-color: $(dark.color); }
+    
+    /* =============== Labels و Categories =============== */
+    .list-label li {
+      position: relative;
+      display: block;
+      padding: 8px 0;
+      border-top: 1px dotted #eaeaea;
+    }
+    
+    .list-label li a {
+      display: block;
+      color: $(title.color);
+      font-size: 13px;
+      transition: color 0.17s ease;
+    }
+    
+    .list-label li a:hover { color: $(main.color); }
+    
+    /* =============== Popular Posts =============== */
+    .PopularPosts .post {
+      overflow: hidden;
+      margin: 20px 0 0;
+    }
+    
+    .PopularPosts .post-image-link {
+      width: 80px;
+      height: 65px;
+      float: right;
+      overflow: hidden;
+      display: block;
+      margin: 0 12px 0 0;
+    }
+    
+    .PopularPosts .post-title a {
+      color: $(title.color);
+      font-size: 14px;
+      transition: color 0.17s ease;
+    }
+    
+    .PopularPosts .post-title a:hover { color: $(main.color); }
+    
+    /* =============== Post Content =============== */
+    .post-body { line-height: 1.8; }
+    .post-body p { margin-bottom: 1em; }
+    .post-body h2 { margin: 1.5em 0 0.5em; font-size: 22px; }
+    .post-body h3 { margin: 1.2em 0 0.5em; font-size: 18px; }
+    
+    /* =============== Mobile Responsive =============== */
+    @media (max-width: 768px) {
+      body { font-size: 14px; }
+      #main-wrapper, .item #main-wrapper { width: 100%; }
+      #sidebar-wrapper { display: none !important; }
+      .BlogSearch .search-input { width: 100%; border-right-width: 1px; }
+      .BlogSearch .search-action { width: 100%; margin-top: 5px; }
+    }
+    
+    @media (max-width: 480px) {
+      h1 { font-size: 24px; }
+      h2 { font-size: 18px; }
+      body { font-size: 13px; }
+    }
+    
+    /* تقليل الحركات على الأجهزة القديمة */
+    @media (prefers-reduced-motion: reduce) {
+      * { animation-duration: 0.01ms !important; transition-duration: 0.01ms !important; }
+    }
+    
+    ]]></b:skin>
+    
+    <!-- =============== JavaScript Lazy Loading =============== -->
+    <script async='async'>
+    (function() {
+      if ('IntersectionObserver' in window) {
+        const images = document.querySelectorAll('img[data-src]');
+        const imageObserver = new IntersectionObserver((entries) => {
+          entries.forEach(entry => {
+            if (entry.isIntersecting) {
+              const img = entry.target;
+              img.src = img.dataset.src;
+              img.classList.add('lazy-loaded');
+              imageObserver.unobserve(img);
+            }
+          });
+        }, { rootMargin: '50px' });
+        images.forEach(img => imageObserver.observe(img));
+      }
+    })();
+    </script>
+
+  </head>
+
+  <body>
+    <div id='main-container'>
+      <!-- Header Navigation -->
+      <header id='top-bar'>
+        <div class='container'>
+          <nav class='top-bar-nav'>
+            <b:section class='navbar' id='top-navbar' maxwidgets='10' showaddelement='yes'/>
+          </nav>
+        </div>
+      </header>
+
+      <!-- Main Content -->
+      <div id='content-wrapper'>
+        <div class='container'>
+          <div id='main-wrapper'>
+            <b:section class='main' id='main' showaddelement='yes'/>
+          </div>
+          
+          <aside id='sidebar-wrapper'>
+            <b:section class='sidebar' id='sidebar' maxwidgets='5' showaddelement='yes'/>
+          </aside>
+        </div>
+      </div>
+
+      <!-- Footer -->
+      <footer id='footer-wrapper'>
+        <b:section class='footer' id='footer' showaddelement='yes'/>
+      </footer>
+    </div>
+  </body>
+
+</html>
