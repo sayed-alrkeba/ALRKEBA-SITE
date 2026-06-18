@@ -5,21 +5,16 @@
   <head>
     <meta charset='utf-8'/>
     
-    <!-- =============== تحسينات الأداء الأساسية =============== -->
-    <!-- 1. Preconnect للخوادم الخارجية (تحسين الاتصال) -->
+    <!-- تحسينات الأداء الأساسية -->
     <link href='https://fonts.googleapis.com' rel='preconnect' crossorigin/>
     <link href='https://fonts.gstatic.com' rel='preconnect' crossorigin/>
-    
-    <!-- 2. استبدال Font Awesome بنسخة مضغوطة -->
     <link href='https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css' rel='stylesheet' crossorigin='anonymous'/>
     
-    <!-- 3. Meta Viewport محسّن (بدون maximum-scale لتفعيل الـ Zoom) -->
+    <!-- Meta Viewport محسّن -->
     <meta content='width=device-width, initial-scale=1' name='viewport'/>
     
-    <!-- =============== SEO Meta Tags محسّنة للأرشفة =============== -->
+    <!-- SEO Meta Tags محسّنة للأرشفة -->
     <title><b:if cond='data:blog.pageType == "index"'><data:blog.title/><b:else/><data:blog.pageName/> | <data:blog.title/></b:if></title>
-    
-    <!-- Meta Description - مهم جداً للأرشفة -->
     <meta name='description' expr:content='data:blog.pageType == "index" ? data:blog.description : data:post.snippet'/>
     <meta name='keywords' content='الرقيبة التجارية, تجارة, أخبار تجارية'/>
     <meta name='author' expr:content='data:blog.title'/>
@@ -27,7 +22,7 @@
     <meta name='robots' content='index, follow'/>
     <meta name='googlebot' content='index, follow, max-snippet:-1, max-image-preview:large, max-video-preview:-1'/>
     
-    <!-- Open Graph Tags - لتحسين المشاركة بالمواقع الاجتماعية -->
+    <!-- Open Graph Tags -->
     <meta property='og:site_name' expr:content='data:blog.title'/>
     <meta property='og:type' content='website'/>
     <meta property='og:title' expr:content='data:blog.pageName ? data:blog.pageName : data:blog.title'/>
@@ -39,7 +34,7 @@
     <meta name='twitter:card' content='summary_large_image'/>
     <meta name='twitter:title' expr:content='data:blog.pageName ? data:blog.pageName : data:blog.title'/>
     
-    <!-- JSON-LD Structured Data - تحسين ظهور الموقع في البحث -->
+    <!-- JSON-LD Structured Data -->
     <script type='application/ld+json'>{
       "@context": "https://schema.org",
       "@type": "Blog",
@@ -48,21 +43,20 @@
       "description": "<data:blog.description/>"
     }</script>
     
-    <!-- الخطوط المحسّنة - تحميل غير حجز (Async) -->
+    <!-- الخطوط المحسّنة -->
     <link href='https://fonts.googleapis.com/css2?family=Almarai:wght@400;700&amp;family=Cairo:wght@600;800&amp;display=swap' rel='stylesheet' media='print' onload="this.media='all'" crossorigin/>
     
-    <!-- Canonical Link - تجنب محتوى مكرر -->
+    <!-- Canonical Link -->
     <link rel='canonical' expr:href='data:blog.url'/>
     
-    <!-- RSS Feed - مهم للأرشفة -->
+    <!-- RSS Feed -->
     <link rel='alternate' type='application/rss+xml' expr:title='data:blog.title' expr:href='data:blog.url + "/feeds/posts/default"'/>
     
     <b:include data='blog' name='all-head-content'/>
 
-    <!-- =============== CSS المحسّن =============== -->
+    <!-- CSS المحسّن -->
     <b:skin version='2.0.0'><![CDATA[
     
-    /* متغيرات التصميم */
     <Variable name="keycolor" description="Main Color" type="color" hideEditor="true" default="#0028f0" value="#0028f0"/>
     
     <Group description="Theme Colors" selector="body">
@@ -72,7 +66,6 @@
       <Variable name="title.color" description="Title Color" type="color" default="#222222" value="#222222"/>
     </Group>
     
-    /* =============== Reset و Core CSS =============== */
     * { -webkit-box-sizing: border-box; box-sizing: border-box; }
     html { overflow-y: scroll; -webkit-text-size-adjust: 100%; }
     
@@ -88,10 +81,8 @@
       padding: 0;
     }
     
-    /* تحسين الأداء: إزالة الـ Preloader الثقيل */
     #preloader { display: none !important; }
     
-    /* تحسين الوصول للموقع (Accessibility) */
     h1, h2, h3, h4, h5, h6 { 
       font-family: "Cairo", sans-serif; 
       font-weight: 700;
@@ -103,7 +94,6 @@
     a:hover { color: $(title.color); }
     a:visited { color: $(title.color); }
     
-    /* الصور - تحسين الأداء */
     img { 
       border: none; 
       max-width: 100%; 
@@ -111,7 +101,6 @@
       display: block;
     }
     
-    /* تجنب Cumulative Layout Shift (CLS) */
     .post-thumb {
       display: block;
       width: 100%;
@@ -121,7 +110,6 @@
       object-fit: cover;
     }
     
-    /* =============== التخطيط الرئيسي =============== */
     .row { width: 100%; max-width: 1140px; margin: 0 auto; }
     
     #content-wrapper {
@@ -152,7 +140,6 @@
     
     .item #sidebar-wrapper { display: block; }
     
-    /* =============== Navigation Bar =============== */
     #top-bar {
       background-color: rgba(68, 63, 69, 0.95);
       width: 100%;
@@ -175,7 +162,6 @@
     
     .top-bar-nav ul li > a:hover { color: $(main.color); }
     
-    /* =============== Sidebar Widgets =============== */
     .sidebar .widget {
       background-color: #fff;
       padding: 0;
@@ -200,7 +186,6 @@
       margin: 0;
     }
     
-    /* =============== Blog Search =============== */
     .BlogSearch .search-input {
       width: 75%;
       height: 34px;
@@ -225,7 +210,6 @@
     
     .BlogSearch .search-action:hover { background-color: $(dark.color); }
     
-    /* =============== Forms =============== */
     .contact-form-name,
     .contact-form-email,
     .contact-form-email-message {
@@ -252,7 +236,6 @@
     
     .contact-form-button-submit:hover { background-color: $(dark.color); }
     
-    /* =============== Labels و Categories =============== */
     .list-label li {
       position: relative;
       display: block;
@@ -269,7 +252,6 @@
     
     .list-label li a:hover { color: $(main.color); }
     
-    /* =============== Popular Posts =============== */
     .PopularPosts .post {
       overflow: hidden;
       margin: 20px 0 0;
@@ -292,13 +274,11 @@
     
     .PopularPosts .post-title a:hover { color: $(main.color); }
     
-    /* =============== Post Content =============== */
     .post-body { line-height: 1.8; }
     .post-body p { margin-bottom: 1em; }
     .post-body h2 { margin: 1.5em 0 0.5em; font-size: 22px; }
     .post-body h3 { margin: 1.2em 0 0.5em; font-size: 18px; }
     
-    /* =============== Mobile Responsive =============== */
     @media (max-width: 768px) {
       body { font-size: 14px; }
       #main-wrapper, .item #main-wrapper { width: 100%; }
@@ -313,14 +293,12 @@
       body { font-size: 13px; }
     }
     
-    /* تقليل الحركات على الأجهزة القديمة */
     @media (prefers-reduced-motion: reduce) {
       * { animation-duration: 0.01ms !important; transition-duration: 0.01ms !important; }
     }
     
     ]]></b:skin>
     
-    <!-- =============== JavaScript Lazy Loading =============== -->
     <script async='async'>
     (function() {
       if ('IntersectionObserver' in window) {
@@ -344,7 +322,6 @@
 
   <body>
     <div id='main-container'>
-      <!-- Header Navigation -->
       <header id='top-bar'>
         <div class='container'>
           <nav class='top-bar-nav'>
@@ -353,7 +330,6 @@
         </div>
       </header>
 
-      <!-- Main Content -->
       <div id='content-wrapper'>
         <div class='container'>
           <div id='main-wrapper'>
@@ -366,7 +342,6 @@
         </div>
       </div>
 
-      <!-- Footer -->
       <footer id='footer-wrapper'>
         <b:section class='footer' id='footer' showaddelement='yes'/>
       </footer>
